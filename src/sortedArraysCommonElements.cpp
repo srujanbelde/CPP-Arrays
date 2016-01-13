@@ -15,6 +15,7 @@ NOTES:
 */
 
 #include <iostream>
+#include<stdlib.h>
 
 struct transaction {
 	int amount;
@@ -23,5 +24,30 @@ struct transaction {
 };
 
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+	if (A == NULL || B == NULL)
+		return NULL;
+	if (A == B)
+		return A;
+	int i, j,c=0;
+	struct transaction C[100];
+	for (i = 0; i < ALen; i++)
+	{
+		for (j = 0; j < BLen; j++)
+		{
+			int day1 = ((A[i].date[0] - '0') * 10) + (A[i].date[1] - '0');
+			int month1 = ((A[i].date[3] - '0') * 10) + (A[i].date[4] - '0');
+			int year1 = ((A[i].date[6] - '0') * 1000) + ((A[i].date[7] - '0') * 100) + ((A[i].date[8] - '0') * 10) + (A[i].date[9] - '0');
+			int day2 = ((B[i].date[0] - '0') * 10) + (B[i].date[1] - '0');
+			int month2 = ((B[i].date[3] - '0') * 10) + (B[i].date[4] - '0');
+			int year2 = ((B[i].date[6] - '0') * 1000) + ((B[i].date[7] - '0') * 100) + ((B[i].date[8] - '0') * 10) + (B[i].date[9] - '0');
+			if (day1 == day2&&month1 == month2&&year1 == year2)
+			{
+				C[c] = A[i];
+				c++;
+			}
+		}
+	}
+	if (c == 0)
+		return NULL;
+	return C;
 }
